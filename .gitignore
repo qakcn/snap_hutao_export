@@ -137,3 +137,20 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Project-specific ignores for this repo
+# ignore built frontend bundle and wasm artifacts
+/public/bundle.js
+/public/sql-wasm.js
+/public/*.wasm
+/public/*.map
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# If you build into a `dist` or `build` folder in future
+/dist/
+/build/

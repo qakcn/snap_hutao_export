@@ -1,0 +1,14 @@
+{
+  "name": "hutao-sqlite-frontend",
+  "version": "0.1.0",
+  "description": "A small static frontend demo to open and manipulate SQLite files in the browser using sql.js (WASM).",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "author": "",
+  "license": "MPL-2.0",
+  "devDependencies": {
+    "esbuild": "^0.27.0",
+    "sql.js": "^1.8.0"
+  }
+}

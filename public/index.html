@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>胡桃工具箱数据导出工具</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <main>
+        <header>
+            <h1>胡桃工具箱数据导出工具</h1>
+            <p>目前暂时只能导出成就数据，后续将陆续增加其他数据导出功能</p>
+        </header>
+
+        <section>
+            <h2>选择胡桃工具箱数据文件</h2>
+            <p>此文件在初始化胡桃工具箱时设置的数据目录内，一般在<b class="path">文档\Hutao</b>目录下</p>
+            <p>（如<b class="path">C:\User\<i class="variable" title="替换为你自己的Windows用户名">&lt;用户名&gt;</i>\Documents\Hutao</b>）</p>
+            <input id="file" type="file" accept=".db" hidden>
+            <button id="selectFile">选择文件</button>
+            <p id="fileInfo"></p>
+        </section>
+
+        <section>
+            <h2>导出成就数据</h2>
+            <p>导出格式为<a target="_blank" href="https://uigf.org/zh/standards/uiaf.html">UIAF 1.1</a></p>
+            <button id="exportAchievements" disabled>导出</button>
+        </section>
+
+        <section>
+            <h3>操作日志</h3>
+            <div id="results"></div>
+        </section>
+
+        <footer>
+            <p><a href="https://github.com/qakcn/snap_hutao_export" target="_blank">GitHub仓库</a> - <a href="https://tsukkomi.org" target="_blank">作者博客</a></p>
+        </footer>
+    </main>
+
+    <!-- 先加载本地的 sql-wasm 脚本（会注入全局 initSqlJs），再加载打包后的应用逻辑 -->
+    <script src="sql-wasm.js"></script>
+    <script src="bundle.js"></script>
+</body>
+
+</html>
