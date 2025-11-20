@@ -158,3 +158,13 @@ button::before {
 button:hover::before {
     transform: translateX(0);
 }
+
+a {
+    color:#2980b9;
+}
+a:visited {
+    color:#2980b9;
+}
+a:hover {
+    color:#91c9ef;
+}

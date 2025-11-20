@@ -12,13 +12,14 @@
     <main>
         <header>
             <h1>胡桃工具箱数据导出工具</h1>
+            <p>本工具完全运行在本地，不会上传任何数据到服务器</p>
             <p>目前暂时只能导出成就数据，后续将陆续增加其他数据导出功能</p>
         </header>
 
         <section>
             <h2>选择胡桃工具箱数据文件</h2>
             <p>此文件在初始化胡桃工具箱时设置的数据目录内，一般在<b class="path">文档\Hutao</b>目录下</p>
-            <p>（如<b class="path">C:\User\<i class="variable" title="替换为你自己的Windows用户名">&lt;用户名&gt;</i>\Documents\Hutao</b>）</p>
+            <p>（如<b class="path">C:\Users\<i class="variable" title="替换为你自己的Windows用户名">&lt;用户名&gt;</i>\Documents\Hutao</b>）</p>
             <input id="file" type="file" accept=".db" hidden>
             <button id="selectFile">选择文件</button>
             <p id="fileInfo"></p>
@@ -27,7 +28,15 @@
         <section>
             <h2>导出成就数据</h2>
             <p>导出格式为<a target="_blank" href="https://uigf.org/zh/standards/uiaf.html">UIAF 1.1</a></p>
+            <p>会自动开始下载，请到浏览器下载列表中查看</p>
             <button id="exportAchievements" disabled>导出</button>
+        </section>
+
+        <section>
+            <h2>导出其他数据</h2>
+            <p>抽卡记录导出功能开发中；深渊数据因没有统一标准，暂时搁置开发</p>
+            <p>抽卡记录和深渊数据可以使用下面的工具来导出到Starward启动器</p>
+            <p><a href="https://github.com/Scighost/Starward" target="_blank">Starward</a> - <a href="https://github.com/Scighost/SnapHutaoExporter" target="_blank">SnapHutaoExporter</a></p>
         </section>
 
         <section>
