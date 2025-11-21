@@ -11,6 +11,7 @@ const achievementsSect = document.getElementById('achievements-sect');
 const gachaSect = document.getElementById('gacha-sect');
 const exportGachaBtn = document.getElementById('exportGacha');
 const uidSelect = document.getElementById('uid-select');
+const langSelect = document.getElementById('lang-select');
 
 /** 简单的页面日志输出（如果页面有 #results 则写入，否则写 console） */
 function appendLog(message) {
@@ -87,13 +88,14 @@ async function initSqlJsAndUI() {
             try {
                 let list = [];
 
-                 const nodes = document.querySelectorAll('input[name="gachaUid"]:checked');
+                 const uidNodes = document.querySelectorAll('input[name="gachaUid"]:checked');
 
-                const values = Array.from(nodes, el => el.value);
+                const uidValues = Array.from(uidNodes, el => el.value);
                 const uids = JSON.parse(exportGachaBtn.dataset.uids);
+                const langValue = langSelect.value;
                 const gachaList = [];
 
-                values.forEach(innerid => {
+                uidValues.forEach(innerid => {
                     const uid = uids[innerid];
                     // 按照指定字段查询并映射列名
                     const timestr = queryToObjects("SELECT Time FROM gacha_items WHERE ArchiveId='"+innerid+"'")[0].Time;
@@ -104,14 +106,16 @@ async function initSqlJsAndUI() {
                     
                     list = list.map(it => ({
                         ...it,
-                        ...gachaData[it.item_id],
-                        count: "1",
+                        name: gachaData[it.item_id].name[langValue],
+                        rank_type: gachaData[it.item_id].rank_type,
+                        item_type: gachaData[it.item_id].item_type,
+                        count: "1"
                     }));
 
                     const gachaObj = {
                         uid: uid,
                         timezone: timezone,
-                        lang: "zh-cn",
+                        lang: langValue,
                         list: list
                     }
 
