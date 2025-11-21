@@ -1,11 +1,11 @@
 {
-  "name": "hutao-sqlite-frontend",
-  "version": "0.1.0",
-  "description": "A small static frontend demo to open and manipulate SQLite files in the browser using sql.js (WASM).",
+  "name": "snap_hutao_export",
+  "version": "0.2.0",
+  "description": "A tool based on HTML/JS to exporting Snap Hutao data.",
   "scripts": {
     "build": "node build.js"
   },
-  "author": "",
+  "author": "qakcn",
   "license": "MPL-2.0",
   "devDependencies": {
     "esbuild": "^0.27.0",

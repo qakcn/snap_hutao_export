@@ -49,12 +49,12 @@ main p {
 
 section {
     color: #34495e;
-                padding: 20px;
-                background: white;
-                border-radius: 8px;
-                box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-                margin: 20px;
-                text-align: center;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    margin: 20px;
+    text-align: center;
 }
 
 h2 {
@@ -168,3 +168,17 @@ a:visited {
 a:hover {
     color:#91c9ef;
 }
+
+.hidden {
+    display:none;
+}
+@keyframes highlightFade {
+    from { background-color: #94e1b4; }
+    to   { background-color: #ffffff; }
+}
+.highlight {
+    animation: highlightFade 1s ease-in-out 1 forwards;
+    will-change: background-color;
+}
+
+

@@ -13,7 +13,6 @@
         <header>
             <h1>胡桃工具箱数据导出工具</h1>
             <p>本工具完全运行在本地，不会上传任何数据到服务器</p>
-            <p>目前暂时只能导出成就数据，后续将陆续增加其他数据导出功能</p>
         </header>
 
         <section>
@@ -25,16 +24,29 @@
             <p id="fileInfo"></p>
         </section>
 
-        <section>
+        <section id="achievements-sect" class="hidden">
             <h2>导出成就数据</h2>
             <p>导出格式为<a target="_blank" href="https://uigf.org/zh/standards/uiaf.html">UIAF 1.1</a></p>
             <p>会自动开始下载，请到浏览器下载列表中查看</p>
             <button id="exportAchievements" disabled>导出</button>
         </section>
 
+        <section id="gacha-sect" class="hidden">
+            <h2>导出抽卡数据</h2>
+            <div>
+                <p>请选择要导出的UID</p>
+                <div id="uid-select">
+
+                </div>
+                <p>导出格式为<a target="_blank" href="https://uigf.org/zh/standards/uigf.html">UIGF 4.1</a></p>
+            <p>会自动开始下载，请到浏览器下载列表中查看</p>
+            <button id="exportGacha" disabled>导出</button>
+            </div>
+        </section>
+
         <section>
             <h2>导出其他数据</h2>
-            <p>抽卡记录导出功能开发中；深渊数据因没有统一标准，暂时搁置开发</p>
+            <p>深渊数据因没有统一标准，暂时搁置开发</p>
             <p>抽卡记录和深渊数据可以使用下面的工具来导出到Starward启动器</p>
             <p><a href="https://github.com/Scighost/Starward" target="_blank">Starward</a> - <a href="https://github.com/Scighost/SnapHutaoExporter" target="_blank">SnapHutaoExporter</a></p>
         </section>
@@ -51,6 +63,7 @@
 
     <!-- 先加载本地的 sql-wasm 脚本（会注入全局 initSqlJs），再加载打包后的应用逻辑 -->
     <script src="sql-wasm.js"></script>
+    <script src="gachaData.js"></script>
     <script src="bundle.js"></script>
 </body>
 
