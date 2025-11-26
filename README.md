@@ -11,20 +11,19 @@
 
 ## 版本更新
 
-* 0.3.0
+* 1.0.0  
+  完善多语言支持。  
+  已基本实现预期功能，之后将进入维护期。
+* 0.3.0  
   对多语言导出的初步支持。
-
 * 0.2.0  
   增加抽卡数据导出功能。
-
 * 0.1.0  
   初始版本。
 
 ## 未来计划
 
 1. ~~增加深渊数据导出功能；~~因没有统一的标准，暂时搁置此功能开发，可参见下面的“其他工具”；
-2. ~~增加多语言支持；~~已实现多语言抽卡数据导出的初步支持，多语言UI实现中；
-3. more...
 
 ## 其他工具
 
@@ -45,6 +44,9 @@ A tool based on HTML/JS to exporting Snap Hutao data.
 
 ## Versions
 
+* 1.0.0
+  Add feature: multi-lingual support implemented.  
+  Expected features implemented, now in maintenance phase.
 * 0.3.0  
   Add feature: Very early implementation for multi-lingual support.
 * 0.2.0  
@@ -55,8 +57,6 @@ A tool based on HTML/JS to exporting Snap Hutao data.
 ## Future plans
 
 1. ~~Spiral Abyss, Imaginarium Theater and Stygian Onslaught data exporting;~~Due to no standard format for these data exchanging, this feature won't be developed for now. Other tools can be used for this purpose are listed below.
-2. ~~More languages;~~Very early support for multi-lingual Gacha data export has been implemented, UI support is WIP.
-3. more...
 
 ## Other tools
 

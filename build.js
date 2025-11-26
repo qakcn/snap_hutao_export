@@ -3,7 +3,7 @@ const esbuild = require('esbuild');
 const fs = require('fs');
 const path = require('path');
 
-const outDir = path.join(__dirname, 'public');
+const outDir = path.join(__dirname, 'public', 'scripts');
 
 async function build(){
   console.log('Start build...');

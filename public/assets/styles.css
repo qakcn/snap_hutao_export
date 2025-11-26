@@ -4,6 +4,26 @@
     box-sizing: border-box;
 }
 
+:root:lang(en) {
+    font-family: "Segoe UI", "Helvetica Neue", "Helvetica", "Arial", "Noto Sans", "FreeSans", "DejaVu Sans", "Liberation Sans", "Bitstream Vera Sans", sans-serif;
+}
+:root:lang(ja) {
+    font-family: "Meiryo", "Yu Gothic", "Hiragino Sans", "MS PGothic", "MS UI Gothic", sans-serif;
+}
+:root:lang(ko) {
+    font-family: 'Malgun Gothic', 'Gulim', 'Nanum Gothic', 'Hwangseong', 'Noto Sans CJK KR', sans-serif;
+}
+:root:lang(ru) {
+    font-family: 'Segoe UI', 'Tahoma', 'Arial', 'Times New Roman', 'Helvetica Neue', 'DejaVu Sans', 'Liberation Sans', sans-serif;
+}
+:root:lang(zh-cn) {
+    font-family: 'Microsoft YaHei', 'SimHei', 'SimSun', 'PingFang SC', 'Heiti SC', 'Songti SC', 'Noto Sans CJK SC', sans-serif;
+}
+:root:lang(zh-hk) {
+    font-family: 'Microsoft YaHei', 'PMingLiU', 'MingLiU', 'PingFang TC', 'Heiti TC', 'Songti TC', 'Noto Sans CJK TC', sans-serif;
+}
+
+
 body {
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     color: #333;
@@ -43,8 +63,17 @@ h1::after {
 }
 
 main p {
-    text-align: center;
     color: #34495e;
+    max-width: 500px;
+    margin: auto;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+svg {
+    display: inline-block;
+    vertical-align: middle;
 }
 
 section {

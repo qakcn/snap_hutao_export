@@ -3,6 +3,7 @@
 // - 读取本地上传的 .db 文件并加载为 SQLite 数据库
 // - 点击“导出”按钮执行指定 SQL 并把结果以 JSON 下载
 let SQL, db = null;
+const dispLangSel = document.getElementById('display-lang-select');
 const fileInput = document.getElementById('file');
 const exportAchievementsBtn = document.getElementById('exportAchievements');
 const selectFileBtn = document.getElementById('selectFile');
@@ -12,6 +13,8 @@ const gachaSect = document.getElementById('gacha-sect');
 const exportGachaBtn = document.getElementById('exportGacha');
 const uidSelect = document.getElementById('uid-select');
 const langSelect = document.getElementById('lang-select');
+let gachaData = {};
+
 
 /** 简单的页面日志输出（如果页面有 #results 则写入，否则写 console） */
 function appendLog(message) {
@@ -22,16 +25,32 @@ function appendLog(message) {
     console.log(message);
   }
 }
+
+async function initGachaData() {
+    fetch('assets/gachaData.json')
+    .then(response => {
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        return response.json();
+    })
+    .then(json => {
+        gachaData = json;
+        appendLog(i18n.t('log_gacha_data_loaded'));
+    })
+    .catch(err => {
+        appendLog(i18n.t('log_failed_gacha_data_load') + (err && err.message ? err.message : err));
+    });
+}
+
 async function initSqlJsAndUI() {
     try {
         if (typeof initSqlJs !== 'function') {
-            appendLog('警告：`sql-wasm.js` 尚未加载，确保页面中先加载 `sql-wasm.js`。');
+            appendLog(i18n.t('log_wasm_warning'));
             await new Promise(r => setTimeout(r, 200));
         }
-        SQL = await window.initSqlJs({ locateFile: file => './sql-wasm.wasm' });
-        appendLog('sql.js 已加载（WASM，本地）');
+        SQL = await window.initSqlJs({ locateFile: file => './scripts/sql-wasm.wasm' });
+        appendLog(i18n.t('log_sql_js_loaded'));
     } catch (e) {
-        appendLog('初始化 sql.js 失败：' + (e && e.message ? e.message : e));
+        appendLog(i18n.t('log_failed_init_sql_js') + (e && e.message ? e.message : e));
         return;
     }
 
@@ -39,7 +58,7 @@ async function initSqlJsAndUI() {
         fileInput.addEventListener('change', ev => {
             const f = ev.target.files && ev.target.files[0];
             if (!f) return;
-            fileInfoOutput.innerText = '已选择文件：'+f.name;
+            fileInfoOutput.innerText = i18n.t('choose_file_chosen') + f.name;
             const reader = new FileReader();
             reader.onload = () => openDbFromArrayBuffer(reader.result);
             reader.readAsArrayBuffer(f); 
@@ -54,7 +73,7 @@ async function initSqlJsAndUI() {
 
     if (exportAchievementsBtn) {
         exportAchievementsBtn.addEventListener('click', async () => {
-            appendLog('开始导出成就...');
+            appendLog(i18n.t('log_begin_achievements_export'));
             try {
                 let list = [];
                 
@@ -75,16 +94,16 @@ async function initSqlJsAndUI() {
                 const blob = new Blob([json], { type: 'application/json' });
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a'); a.href = url; a.download = 'hutao_export.Achievements.UIAF1.1.json'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-                appendLog('导出成就完成：已生成 JSON 文件');
+                appendLog(i18n.t('log_achievements_exported'));
             } catch (e) {
-                appendLog('导出成就失败：' + (e && e.message ? e.message : e));
+                appendLog(i18n.t('log_failed_achievements_export') + (e && e.message ? e.message : e));
             }
         });
     }
 
     if (exportGachaBtn) {
         exportGachaBtn.addEventListener('click', async () => {
-            appendLog('开始导出抽卡数据...');
+            appendLog(i18n.t('log_begin_gacha_data_export'));
             try {
                 let list = [];
 
@@ -140,9 +159,9 @@ async function initSqlJsAndUI() {
                 a.click();
                 a.remove();
                 URL.revokeObjectURL(url);
-                appendLog('导出抽卡数据完成：已生成 JSON 文件');
+                appendLog(i18n.t('log_gacha_data_exported'));
             } catch (e) {
-                appendLog('导出抽卡数据失败：' + (e && e.message ? e.message : e));
+                appendLog(i18n.t('log_failed_gacha_data_export') + (e && e.message ? e.message : e));
             }
         });
     }
@@ -152,11 +171,11 @@ function openDbFromArrayBuffer(ab) {
     try {
         const u8 = new Uint8Array(ab);
         db = new SQL.Database(u8);
-        appendLog('已加载 DB（字节长度：' + u8.length + '）');
+        appendLog(i18n.t('log_db_loaded_size', {length: u8.length}));
         initAchievementsExport();
         initGachaExport();
     } catch (e) {
-        appendLog('打开 DB 失败：' + (e && e.message ? e.message : e));
+        appendLog(i18n.t('log_failed_db_load') + (e && e.message ? e.message : e));
     }
 }
 
@@ -175,7 +194,7 @@ function initAchievementsExport() {
             }
         }
     } catch(e) {
-        appendLog('初始化成就导出失败：' + (e && e.message ? e.message : e));
+        appendLog(i18n.t('log_failed_init_achievements_export') + (e && e.message ? e.message : e));
     }
 
 }
@@ -204,6 +223,7 @@ function initGachaExport(){
                     uidSelect.appendChild(tdiv);
                 });
                 gachaSect.classList.remove('hidden');
+                langSelectAuto();
                 gachaSect.classList.add('highlight');
                 if (exportGachaBtn) {
                     exportGachaBtn.disabled = false;
@@ -220,7 +240,7 @@ function initGachaExport(){
             }
         }
     } catch(e) {
-        appendLog('初始化抽卡数据导出失败：' + (e && e.message ? e.message : e));
+        appendLog(i18n.t('log_failed_init_gacha_data_export') + (e && e.message ? e.message : e));
     }
 }
 
@@ -259,5 +279,97 @@ function scrollToElement(el) {
   return true;
 }
 
+const i18n = {
+  locale: null,
+  messages: {},
+  async load(locale) {
+    this.locale = locale;
+    try {
+      // 使用绝对路径 /locales/，避免相对路径歧义
+      const resp = await fetch(`assets/locales/${locale}.json`);
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      this.messages = await resp.json();
+    } catch (e) {
+      console.warn('i18n load failed', e);
+      this.messages = {};
+    }
+  },
+  // 简单文本取回 + 占位符替换 {name}
+  t(key, vars = {}) {
+    let s = this.messages[key] ?? key;
+    return s.replace(/\{(\w+)\}/g, (_, k) => (vars[k] != null ? vars[k] : `{${k}}`));
+  }
+};
+
+// 把 data-i18n 应用到页面
+function applyTranslations(root = document) {
+  root.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const attr = el.getAttribute('data-i18n-attr'); // optional
+    const rawVars = el.getAttribute('data-i18n-vars'); // e.g. '{"name":"Alice"}'
+    let vars = {};
+    if (rawVars) {
+      try { vars = JSON.parse(rawVars); } catch(e){/* ignore */ }
+    }
+    const text = i18n.t(key, vars);
+    if (attr) el.setAttribute(attr, text); else el.textContent = text;
+  });
+}
+
+async function initLocale() {
+  const saved = localStorage.getItem('locale');
+  const nav = (navigator.language || 'zh-cn').toLowerCase();
+  const defaultLocale = saved || (nav.startsWith('en') ? 'en' : 'zh-cn');
+
+  await i18n.load(defaultLocale);
+  applyTranslations();
+
+  // set html lang and direction
+  document.documentElement.lang = defaultLocale;
+  document.documentElement.dir = (defaultLocale === 'ar' || defaultLocale === 'he') ? 'rtl' : 'ltr';
+}
+
+async function switchLocale(locale) {
+  await i18n.load(locale);
+  applyTranslations();
+  localStorage.setItem('locale', locale);
+  document.documentElement.lang = locale;
+  document.documentElement.dir = (locale === 'ar' || locale === 'he') ? 'rtl' : 'ltr';
+  langSelectAuto();
+}
+
+function langSelectAuto(){
+    const locale=i18n.locale;
+    switch(locale) {
+        case 'en':
+            langSelect.value="en-us";
+            break;
+        case 'ja':
+            langSelect.value="ja-jp";
+            break;
+        case 'ko':
+            langSelect.value="ko-kr";
+            break;
+        case 'ru':
+            langSelect.value="ru-ru";
+            break;
+        case "zh-hk":
+            langSelect.value="zh-hk";
+            break;
+        case "zh-cn":
+            langSelect.value="zh-cn";
+            break;
+  }
+}
+
+// 绑定选择器（假设有 #lang-select）
+if (dispLangSel) {
+  dispLangSel.value = localStorage.getItem('locale') || '';
+  dispLangSel.addEventListener('change', e => switchLocale(e.target.value));
+}
+
+// 在应用启动时调用
+initLocale();
 initSqlJsAndUI();
+initGachaData();
 

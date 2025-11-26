@@ -140,10 +140,7 @@ vite.config.ts.timestamp-*
 
 # Project-specific ignores for this repo
 # ignore built frontend bundle and wasm artifacts
-/public/bundle.js
-/public/sql-wasm.js
-/public/*.wasm
-/public/*.map
+/public/scripts/
 
 # Editor / OS
 .DS_Store
