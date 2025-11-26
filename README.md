@@ -23,7 +23,7 @@
 
 ## 未来计划
 
-1. ~~增加深渊数据导出功能；~~因没有统一的标准，暂时搁置此功能开发，可参见下面的“其他工具”；
+1. ~~增加深渊数据导出功能；~~ 因没有统一的标准，暂时搁置此功能开发，可参见下面的“其他工具”；
 
 ## 其他工具
 
@@ -56,7 +56,7 @@ A tool based on HTML/JS to exporting Snap Hutao data.
 
 ## Future plans
 
-1. ~~Spiral Abyss, Imaginarium Theater and Stygian Onslaught data exporting;~~Due to no standard format for these data exchanging, this feature won't be developed for now. Other tools can be used for this purpose are listed below.
+1. ~~Spiral Abyss, Imaginarium Theater and Stygian Onslaught data exporting;~~ Due to no standard format for these data exchanging, this feature won't be developed for now. Other tools can be used for this purpose are listed below.
 
 ## Other tools
 
