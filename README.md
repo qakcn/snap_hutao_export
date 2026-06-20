@@ -4,9 +4,11 @@
 
 抽卡数据来自于Starward项目，感谢其作者Scighost。
 
+**2026-06-20：本项目即日起冻结，不再开发与维护**
+
 ## 使用方法
 
-1. 直接访问<https://tsukkomi.org/snap_hutao_export>使用。
+1. ~~直接访问<https://tsukkomi.org/snap_hutao_export>使用。~~ 已于2026年3月起停止服务
 2. 安装Node.js，克隆本仓库后，运行`npm install`安装依赖，再运行`npm run build`构建文件，生成的文件会自动部署到`public/`目录下，将此目录下的文件放到HTTP服务器上访问使用。
 
 ## 版本更新
@@ -37,9 +39,11 @@
 
 A tool based on HTML/JS to exporting Snap Hutao data.
 
+**2026-06-20: This project will be archived, no more maintenance and development.**
+
 ## Usage
 
-1. Visit <https://tsukkomi.org/snap_hutao_export> to use.
+1. ~~Visit <https://tsukkomi.org/snap_hutao_export> to use.~~ Not available after March 1st, 2026.
 2. Install Node.js. Clone this respository. Run `npm install` to install dependencies. Run `npm run build` to build files. Built files will be put into `public/` directory, copy them to a HTTP server and visit to use.
 
 ## Versions
